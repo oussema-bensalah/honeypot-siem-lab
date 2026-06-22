@@ -2,7 +2,6 @@
 
 A fully functional SSH honeypot integrated with an ELK Stack SIEM, built from scratch on a local VirtualBox lab. The project captures simulated attacker sessions, parses and indexes logs in real time, visualizes attack patterns on a Kibana dashboard, and triggers automated alerting rules.
 
-Built as a PFE project — Enet'Com Sfax — 2026.
 
 ---
 
