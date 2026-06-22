@@ -53,9 +53,7 @@ Port 22 on the honeypot is intercepted by an iptables NAT rule and redirected to
 ![Kibana rules page both enabled](screenshots/rules.png)
 
 ![Kibana rules logs active alerts](screenshots/logs.png)
-> 📸 **[screenshot: Rules page — both rules Enabled]**
 
-> 📸 **[screenshot: Rules Logs — Active alerts firing]**
 
 ---
 
