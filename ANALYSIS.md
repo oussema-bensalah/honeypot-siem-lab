@@ -66,9 +66,9 @@ Hydra attempted multiple username/password combinations in parallel (`-t 8` thre
 
 **Result:** Hydra confirmed a successful login with `root:admin`. All attempts and the final success event were logged and appeared on the Kibana dashboard in near real time.
 
-<img width="635" height="301" alt="image" src="https://github.com/user-attachments/assets/1227ab58-32b3-40a5-a78b-285e6777afc4" />
+![Hydra brute](screenshots/hydra.png)
 
-<img width="945" height="404" alt="image" src="https://github.com/user-attachments/assets/c4b847c5-c447-4cd9-976e-377a9f7f207a" />
+![Kibana attack timeline dashboard](screenshots/attack-attempts.png)
 
 
 
@@ -85,7 +85,7 @@ Analysis of the captured login attempts reveals consistent patterns in attacker 
 - **Username:** `root` is the first and most common target. Attackers prioritize root because a successful login grants immediate full system access with no privilege escalation required.
 - **Password list:** Common passwords like `123456`, `password`, `admin`, `root`, and short keyboard patterns dominate the top attempts. These appear in the first few hundred lines of any standard wordlist.
 - **Key observation:** The password `admin` — which succeeded — does not appear in the top 5,000 most common passwords in rockyou.txt (it sits at line ~19,819). This illustrates that many real attackers use full or extended wordlists, making even moderately obscure passwords vulnerable given enough time.
-- <img width="946" height="401" alt="image" src="https://github.com/user-attachments/assets/5f7fbf8e-bae1-4b41-8f3f-9a8f52d5c53e" />
+![Top attempted passwords panel](screenshots/top-passwords.png)
 
 
 
@@ -113,7 +113,8 @@ This is a textbook **initial access → discovery** sequence. Each command serve
 | `cat /etc/shadow` | Attempt to extract password hashes |
 
 The sequence follows a logical escalation — confirm access, understand the environment, then harvest credentials for further use or lateral movement.
-<img width="937" height="402" alt="image" src="https://github.com/user-attachments/assets/2209f142-61b4-47a2-9937-4cc778a6a158" />
+![Top key wordsl](screenshots/input-keyword.png)
+
 
 
 
@@ -127,9 +128,10 @@ Both Kibana alerting rules fired simultaneously during the brute force simulatio
 
 The simultaneous firing is **expected** — Hydra opens a new TCP connection per attempt, so a brute force attack always generates both a connection burst and a login failure spike at the same time. This is standard SOC behavior: multiple rules alerting on the same source IP is a signal for alert correlation, pointing to a single coordinated attack rather than isolated events.
 
-<img width="826" height="308" alt="image" src="https://github.com/user-attachments/assets/d1e5a2aa-5d20-41b4-ad27-0f2c6be9a912" />
+![Kibana rules logs active alerts](screenshots/logs.png)
 
-<img width="1626" height="248" alt="image" src="https://github.com/user-attachments/assets/34cdacc4-167e-4bc7-8c7c-4ae9122633f2" />
+![Kibana rules page both enabled](screenshots/rules.png)
+
 
 
 
