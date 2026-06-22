@@ -83,7 +83,7 @@ Hydra attempted multiple username/password combinations in parallel (`-t 8` thre
 Analysis of the captured login attempts reveals consistent patterns in attacker credential choices:
 
 - **Username:** `root` is the first and most common target. Attackers prioritize root because a successful login grants immediate full system access with no privilege escalation required.
-- **Password list:** Common passwords like `123456`, `password`, `admin`, `root`, and short keyboard patterns dominate the top attempts. These appear in the first few hundred lines of any standard wordlist.
+- **Password list:** Common passwords like `123456`, `password`, `root`, and short keyboard patterns dominate the top attempts. These appear in the first few hundred lines of any standard wordlist.
 - **Key observation:** The password `admin` — which succeeded — does not appear in the top 5,000 most common passwords in rockyou.txt (it sits at line ~19,819). This illustrates that many real attackers use full or extended wordlists, making even moderately obscure passwords vulnerable given enough time.
 ![Top attempted passwords panel](screenshots/top-passwords.png)
 
