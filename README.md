@@ -43,7 +43,7 @@ Port 22 on the honeypot is intercepted by an iptables NAT rule and redirected to
 
 ## Dashboard
 
-![screenshot: full Kibana dashboard — all 5 panels](screenshots/dashboard.png)
+![screenshot: full Kibana dashboard — all 5 panels](screenshots/dashboard1.png)
 
 ---
 
