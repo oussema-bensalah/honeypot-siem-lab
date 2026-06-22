@@ -33,7 +33,6 @@ Port 22 on the honeypot is intercepted by an iptables NAT rule and redirected to
 
 - **Cowrie honeypot** — emulates a full Linux shell, captures credentials and commands
 - **Real-time log pipeline** — Filebeat → Logstash → Elasticsearch, fully automated
-- **Custom index template** — explicit field mappings for `src_ip` (ip type), `src_ip_str` (keyword copy), `username`, `password`, `eventid`
 - **Kibana dashboard** — 5 panels: attack attempts over time, top attacker IPs, top usernames, top passwords, executed commands
 - **Automated alerting rules**
   - Brute Force: >10 failed logins in 5 minutes
