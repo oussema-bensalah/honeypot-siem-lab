@@ -44,7 +44,7 @@ Port 22 on the honeypot is intercepted by an iptables NAT rule and redirected to
 
 ## Dashboard
 
-> 📸 **[screenshot: full Kibana dashboard — all 5 panels]**
+![screenshot: full Kibana dashboard — all 5 panels](screenshots/dashboard.png)
 
 ---
 
@@ -68,54 +68,6 @@ Port 22 on the honeypot is intercepted by an iptables NAT rule and redirected to
 
 All VMs run on a VirtualBox internal network (`intnet`), isolated from the host machine's internet connection.
 
-### Startup order
-```
-elk-siem → honeypot → kali
-```
-
-### Key paths
-
-| Component | Path |
-|---|---|
-| Cowrie config | `/home/cowrie/cowrie/etc/cowrie.cfg` |
-| Cowrie credentials | `/home/cowrie/cowrie/etc/userdb.txt` |
-| Logstash pipeline | `/etc/logstash/conf.d/cowrie.conf` |
-| UFW NAT rules | `/etc/ufw/before.rules` |
-
-### Start Cowrie
-```bash
-sudo su - cowrie
-cd cowrie && source cowrie-env/bin/activate && cowrie start
-exit
-```
-
-### Verify Cowrie is running
-```bash
-sudo ss -tlnp | grep 2222
-```
-
-### Full Filebeat re-sync (if logs stop flowing)
-```bash
-sudo systemctl stop filebeat
-sudo rm -rf /var/lib/filebeat/registry
-sudo systemctl start filebeat
-```
-
----
-
-## Logstash Pipeline
-
-```conf
-filter {
-  mutate { rename => { "input" => "filebeat_input" } }
-  json {
-    source => "message"
-  }
-  mutate { copy => { "src_ip" => "src_ip_str" } }
-}
-```
-
-The `src_ip_str` field is a keyword copy of `src_ip` — required because Kibana's alerting rule engine only accepts `keyword` type fields for group-by aggregations. The `ip` type field works everywhere else in Kibana but is ineligible for alerting rules.
 
 ---
 
